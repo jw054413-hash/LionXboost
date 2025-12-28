@@ -70,6 +70,7 @@ export default function DocsPage() {
           padding: 1rem;
           overflow-x: auto;
           margin: 1.5rem 0;
+          max-width: 100%;
         }
         
         @media (min-width: 640px) {
@@ -82,6 +83,8 @@ export default function DocsPage() {
           font-family: 'Courier New', monospace;
           font-size: 0.75rem;
           line-height: 1.6;
+          word-wrap: break-word;
+          white-space: pre-wrap;
         }
         
         @media (min-width: 640px) {
@@ -101,7 +104,9 @@ export default function DocsPage() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0B0F1A]/95 backdrop-blur-lg border-b border-emerald-500/10' : 'bg-[#0B0F1A]/95 backdrop-blur-lg border-b border-emerald-500/10'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <Link to="/" className="hover:opacity-80 transition-opacity">
-            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">LionXboost</span>
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent break-words">
+              LionXboost
+            </span>
           </Link>
           <div className="flex items-center gap-3 sm:gap-6">
             <Link to="/" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm sm:text-base">Home</Link>
@@ -199,14 +204,14 @@ export default function DocsPage() {
         )}
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-72">
+        <main className="flex-1 lg:ml-72 w-full overflow-x-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             {/* Introduction */}
             <section id="introduction" className="mb-16 sm:mb-24">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text text-transparent">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text text-transparent break-words">
                 Technical Documentation
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 Welcome to the LionXboost technical documentation. This guide provides comprehensive information for developers, nodes, and integrators building on our decentralized verification infrastructure.
               </p>
               
@@ -215,9 +220,9 @@ export default function DocsPage() {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-emerald-500/20 rounded-lg flex-shrink-0">
                     <i className="ri-information-line text-xl sm:text-2xl text-emerald-400"></i>
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-base sm:text-lg font-semibold mb-2 text-emerald-400">Protocol Overview</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed break-words">
                       LionXboost is a decentralized infrastructure layer enabling cryptographic verification of off-chain data without trust assumptions. It provides a Byzantine fault-tolerant consensus mechanism for trustless verification across Web3 applications.
                     </p>
                   </div>
@@ -251,18 +256,18 @@ export default function DocsPage() {
 
             {/* Getting Started */}
             <section id="getting-started" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Getting Started</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">Getting Started</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 This guide will help you integrate the LionXboost into your Web3 application in minutes.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-emerald-400">Installation</h3>
-              <p className="text-gray-400 mb-4">Install the protocol SDK using npm or yarn:</p>
-              <pre><code><span className="keyword">npm</span> install <span className="string">@lionxboost/sdk</span></code></pre>
+              <h3 className="text-2xl font-semibold mb-4 text-emerald-400 break-words">Installation</h3>
+              <p className="text-gray-400 mb-4 break-words">Install the protocol SDK using npm or yarn:</p>
+              <pre className="overflow-x-auto"><code className="text-xs sm:text-sm"><span className="keyword">npm</span> install <span className="string">@lionxboost/sdk</span></code></pre>
 
-              <h3 className="text-2xl font-semibold mb-4 mt-8 text-emerald-400">Quick Start</h3>
-              <p className="text-gray-400 mb-4">Initialize the client and submit your first verification request:</p>
-              <pre><code><span className="keyword">import</span> {`{ `}<span className="function">VerificationClient</span>{` }`} <span className="keyword">from</span> <span className="string">'@lionxboost/sdk'</span>;
+              <h3 className="text-2xl font-semibold mb-4 mt-8 text-emerald-400 break-words">Quick Start</h3>
+              <p className="text-gray-400 mb-4 break-words">Initialize the client and submit your first verification request:</p>
+              <pre className="overflow-x-auto"><code className="text-xs sm:text-sm"><span className="keyword">import</span> {`{ `}<span className="function">VerificationClient</span>{` }`} <span className="keyword">from</span> <span className="string">'@lionxboost/sdk'</span>;
 
 <span className="comment">// Initialize client with your configuration</span>
 <span className="keyword">const</span> client = <span className="keyword">new</span> <span className="function">VerificationClient</span>({`{`}
@@ -300,8 +305,8 @@ export default function DocsPage() {
 
             {/* Architecture */}
             <section id="architecture" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Protocol Architecture</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">Protocol Architecture</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 LionXboost consists of four core layers working together to provide trustless verification.
               </p>
 
@@ -311,9 +316,9 @@ export default function DocsPage() {
                     <div className="w-8 h-8 sm:w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
                       1
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-3">Application Layer</h3>
-                      <p className="text-gray-400 leading-relaxed mb-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl font-semibold mb-3 break-words">Application Layer</h3>
+                      <p className="text-gray-400 leading-relaxed mb-4 break-words">
                         Client SDKs and APIs enabling applications to submit verification requests. Supports multiple programming languages and frameworks with consistent interfaces.
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -387,14 +392,14 @@ export default function DocsPage() {
 
             {/* Smart Contracts */}
             <section id="smart-contracts" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Smart Contracts</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">Smart Contracts</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 Core protocol contracts deployed on supported networks. All contracts are verified, audited, and open source.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-emerald-400">VerificationRegistry.sol</h3>
-              <p className="text-gray-400 mb-4">Main registry contract managing verification requests and proofs.</p>
-              <pre><code><span className="keyword">interface</span> <span className="function">IVerificationRegistry</span> {`{`}
+              <h3 className="text-2xl font-semibold mb-4 text-emerald-400 break-words">VerificationRegistry.sol</h3>
+              <p className="text-gray-400 mb-4 break-words">Main registry contract managing verification requests and proofs.</p>
+              <pre className="overflow-x-auto"><code className="text-xs sm:text-sm"><span className="keyword">interface</span> <span className="function">IVerificationRegistry</span> {`{`}
   <span className="comment">// Submit verification request</span>
   <span className="keyword">function</span> <span className="function">submitRequest</span>(
     <span className="keyword">bytes32</span> dataHash,
@@ -414,9 +419,9 @@ export default function DocsPage() {
   ) <span className="keyword">external</span> <span className="keyword">view</span> <span className="keyword">returns</span> (VerificationResult <span className="keyword">memory</span>);
 {`}`}</code></pre>
 
-              <h3 className="text-2xl font-semibold mb-4 mt-6 text-emerald-400">NodeStaking.sol</h3>
-              <p className="text-gray-400 mb-4">Manages node stakes and slashing conditions.</p>
-              <pre><code><span className="keyword">interface</span> <span className="function">INodeStaking</span> {`{`}
+              <h3 className="text-2xl font-semibold mb-4 mt-6 text-emerald-400 break-words">NodeStaking.sol</h3>
+              <p className="text-gray-400 mb-4 break-words">Manages node stakes and slashing conditions.</p>
+              <pre className="overflow-x-auto"><code className="text-xs sm:text-sm"><span className="keyword">interface</span> <span className="function">INodeStaking</span> {`{`}
   <span className="comment">// Stake tokens to become node</span>
   <span className="keyword">function</span> <span className="function">stake</span>(<span className="keyword">uint256</span> amount) <span className="keyword">external</span>;
 
@@ -441,10 +446,10 @@ export default function DocsPage() {
               </div>
 
               <div className="bg-[#161B22] border border-gray-800 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8">
-                <h4 className="font-semibold mb-4">Deployed Contract</h4>
+                <h4 className="font-semibold mb-4 break-words">Deployed Contract</h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                    <code className="text-emerald-400 break-all">{contractAddress}</code>
+                    <code className="text-emerald-400 break-all text-xs sm:text-sm">{contractAddress}</code>
                   </div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-gray-800">
@@ -452,7 +457,7 @@ export default function DocsPage() {
                     href={githubAccount}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer break-words text-sm"
                   >
                     <i className="ri-github-fill"></i>
                     View Source Code
@@ -463,12 +468,12 @@ export default function DocsPage() {
 
             {/* Node Guide */}
             <section id="node-guide" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Node Guide</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">Node Guide</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 Learn how to run a node and participate in the verification network.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-emerald-400">Requirements</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-emerald-400 break-words">Requirements</h3>
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <h4 className="font-semibold mb-3 flex items-center gap-2">
@@ -489,7 +494,7 @@ export default function DocsPage() {
                 </div>
               </div>
 
-              <h3 className="text-2xl font-semibold mb-4 text-emerald-400">Setup Instructions</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-emerald-400 break-words">Setup Instructions</h3>
               <div className="space-y-6">
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <div className="flex items-start gap-4">
@@ -544,12 +549,12 @@ export default function DocsPage() {
 
             {/* API Reference */}
             <section id="api-reference" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">API Reference</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">API Reference</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 Complete API documentation for integrating the LionXboost.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-emerald-400">REST API</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-emerald-400 break-words">REST API</h3>
               <div className="space-y-6">
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <div className="flex items-center gap-3 mb-4">
@@ -604,13 +609,13 @@ export default function DocsPage() {
 
             {/* Integration Guide */}
             <section id="integration" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Integration Guide</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">Integration Guide</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 Step-by-step guide for integrating verification into your Web3 application.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-emerald-400">DeFi Price Feed Example</h3>
-              <p className="text-gray-400 mb-4">Verify oracle price data before executing trades:</p>
+              <h3 className="text-2xl font-semibold mb-4 text-emerald-400 break-words">DeFi Price Feed Example</h3>
+              <p className="text-gray-400 mb-4 break-words">Verify oracle price data before executing trades:</p>
               <pre><code><span className="keyword">import</span> {`{ `}<span className="function">VerificationClient</span>{` }`} <span className="keyword">from</span> <span className="string">'@lionxboost/sdk'</span>;
 
 <span className="keyword">async function</span> <span className="function">executeTrade</span>(tokenA, tokenB, amount) {`{`}
@@ -635,8 +640,8 @@ export default function DocsPage() {
   {`}`}
 {`}`}</code></pre>
 
-              <h3 className="text-2xl font-semibold mb-4 mt-6 text-emerald-400">DAO Governance Example</h3>
-              <p className="text-gray-400 mb-4">Verify off-chain voting results before on-chain execution:</p>
+              <h3 className="text-2xl font-semibold mb-4 mt-6 text-emerald-400 break-words">DAO Governance Example</h3>
+              <p className="text-gray-400 mb-4 break-words">Verify off-chain voting results before on-chain execution:</p>
               <pre><code><span className="keyword">async function</span> <span className="function">executeProposal</span>(proposalId, votes) {`{`}
   <span className="comment">// Verify voting results</span>
   <span className="keyword">const</span> verification = <span className="keyword">await</span> client.<span className="function">verify</span>({`{`}
@@ -656,8 +661,8 @@ export default function DocsPage() {
 
             {/* Security Model */}
             <section id="security" className="mb-16 sm:mb-24">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Security Model</h2>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-words">Security Model</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed break-words">
                 Understanding the economic and cryptographic security guarantees of the protocol.
               </p>
 
@@ -720,13 +725,13 @@ export default function DocsPage() {
 
             {/* Footer Navigation */}
             <div className="border-t border-gray-800 pt-8 sm:pt-12 mt-16 sm:mt-24">
-              <div className="flex items-center justify-between">
-                <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer text-sm">
                   <i className="ri-arrow-left-line"></i>
                   Back to Home
                 </Link>
                 <div className="flex items-center gap-6">
-                  <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer">GitHub</a>
+                  <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer text-sm">GitHub</a>
                 </div>
               </div>
             </div>
