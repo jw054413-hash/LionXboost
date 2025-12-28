@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default function DocsPage() {
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrolled, setScrolled] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Contract address - update this with your actual contract address
   const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
@@ -49,6 +50,7 @@ export default function DocsPage() {
         top: offsetPosition,
         behavior: 'smooth'
       });
+      setSidebarOpen(false);
     }
   };
 
@@ -65,15 +67,27 @@ export default function DocsPage() {
           background: #161B22;
           border: 1px solid rgba(16, 185, 129, 0.2);
           border-radius: 8px;
-          padding: 1.5rem;
+          padding: 1rem;
           overflow-x: auto;
           margin: 1.5rem 0;
         }
         
+        @media (min-width: 640px) {
+          pre {
+            padding: 1.5rem;
+          }
+        }
+        
         code {
           font-family: 'Courier New', monospace;
-          font-size: 0.9rem;
+          font-size: 0.75rem;
           line-height: 1.6;
+        }
+        
+        @media (min-width: 640px) {
+          code {
+            font-size: 0.9rem;
+          }
         }
         
         .keyword { color: #8B5CF6; }
@@ -85,84 +99,90 @@ export default function DocsPage() {
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0B0F1A]/95 backdrop-blur-lg border-b border-emerald-500/10' : 'bg-[#0B0F1A]/95 backdrop-blur-lg border-b border-emerald-500/10'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <Link to="/" className="hover:opacity-80 transition-opacity">
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">LionXboost</span>
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">LionXboost</span>
           </Link>
-          <div className="flex items-center gap-6">
-            <Link to="/" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">Home</Link>
+          <div className="flex items-center gap-3 sm:gap-6">
+            <Link to="/" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm sm:text-base">Home</Link>
             <a href={twitterAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">
-              <i className="ri-twitter-x-line text-lg"></i>
+              <i className="ri-twitter-x-line text-base sm:text-lg"></i>
             </a>
-            <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="px-5 py-2 border border-emerald-400 text-emerald-400 rounded-lg hover:bg-emerald-400/10 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer whitespace-nowrap">
+            <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex px-4 sm:px-5 py-2 border border-emerald-400 text-emerald-400 rounded-lg hover:bg-emerald-400/10 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer whitespace-nowrap text-sm">
               <i className="ri-github-fill mr-2"></i>Explore Repository
             </a>
+            <button 
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-emerald-400 hover:bg-emerald-400/10 rounded-xl transition-all duration-300"
+            >
+              <i className={`${sidebarOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
+            </button>
           </div>
         </div>
       </nav>
 
-      <div className="flex pt-20">
+      <div className="flex pt-16 sm:pt-20">
         {/* Sidebar */}
-        <aside className="hidden lg:block w-72 fixed left-0 top-20 bottom-0 border-r border-gray-800 bg-[#0D1117] overflow-y-auto">
-          <div className="p-6">
-            <div className="mb-8">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Documentation</h3>
+        <aside className={`fixed left-0 top-16 sm:top-20 bottom-0 w-72 border-r border-gray-800 bg-[#0D1117] overflow-y-auto transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
+          <div className="p-4 sm:p-6">
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Documentation</h3>
               <nav className="space-y-1">
                 <button
                   onClick={() => scrollToSection('introduction')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'introduction' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'introduction' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Introduction
                 </button>
                 <button
                   onClick={() => scrollToSection('getting-started')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'getting-started' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'getting-started' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Getting Started
                 </button>
                 <button
                   onClick={() => scrollToSection('architecture')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'architecture' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'architecture' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Architecture
                 </button>
                 <button
                   onClick={() => scrollToSection('smart-contracts')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'smart-contracts' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'smart-contracts' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Smart Contracts
                 </button>
                 <button
                   onClick={() => scrollToSection('node-guide')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'node-guide' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'node-guide' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Node Guide
                 </button>
                 <button
                   onClick={() => scrollToSection('integration')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'integration' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'integration' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Integration Guide
                 </button>
                 <button
                   onClick={() => scrollToSection('security')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === 'security' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                  className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm ${activeSection === 'security' ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
                 >
                   Security Model
                 </button>
               </nav>
             </div>
 
-            <div className="mb-8">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Resources</h3>
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Resources</h3>
               <nav className="space-y-1">
-                <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-300 cursor-pointer">
+                <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="block px-3 sm:px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-300 cursor-pointer text-sm">
                   GitHub Repository
                 </a>
-                <a href="#" className="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-300 cursor-pointer">
+                <a href="#" className="block px-3 sm:px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-300 cursor-pointer text-sm">
                   Whitepaper
                 </a>
-                <a href="#" className="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-300 cursor-pointer">
+                <a href="#" className="block px-3 sm:px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-300 cursor-pointer text-sm">
                   Community
                 </a>
               </nav>
@@ -170,25 +190,33 @@ export default function DocsPage() {
           </div>
         </aside>
 
+        {/* Overlay for mobile */}
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          ></div>
+        )}
+
         {/* Main Content */}
         <main className="flex-1 lg:ml-72">
-          <div className="max-w-4xl mx-auto px-6 py-12">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             {/* Introduction */}
-            <section id="introduction" className="mb-24">
-              <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text text-transparent">
+            <section id="introduction" className="mb-16 sm:mb-24">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text text-transparent">
                 Technical Documentation
               </h1>
-              <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 Welcome to the LionXboost technical documentation. This guide provides comprehensive information for developers, nodes, and integrators building on our decentralized verification infrastructure.
               </p>
               
-              <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-xl p-6 mb-8">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-emerald-500/20 rounded-lg flex-shrink-0">
-                    <i className="ri-information-line text-2xl text-emerald-400"></i>
+              <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-emerald-500/20 rounded-lg flex-shrink-0">
+                    <i className="ri-information-line text-xl sm:text-2xl text-emerald-400"></i>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2 text-emerald-400">Protocol Overview</h3>
+                    <h3 className="text-base sm:text-lg font-semibold mb-2 text-emerald-400">Protocol Overview</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
                       LionXboost is a decentralized infrastructure layer enabling cryptographic verification of off-chain data without trust assumptions. It provides a Byzantine fault-tolerant consensus mechanism for trustless verification across Web3 applications.
                     </p>
@@ -196,35 +224,35 @@ export default function DocsPage() {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6 hover:border-emerald-500/50 transition-all duration-300 hover:scale-105">
-                  <div className="w-12 h-12 flex items-center justify-center bg-emerald-500/10 rounded-lg mb-4">
-                    <i className="ri-shield-check-line text-2xl text-emerald-400"></i>
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                <div className="bg-[#161B22] border border-gray-800 rounded-lg p-4 sm:p-6 hover:border-emerald-500/50 transition-all duration-300 hover:scale-105">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-emerald-500/10 rounded-lg mb-3 sm:mb-4">
+                    <i className="ri-shield-check-line text-xl sm:text-2xl text-emerald-400"></i>
                   </div>
-                  <h3 className="font-semibold mb-2">Trustless</h3>
-                  <p className="text-sm text-gray-400">No central authority or trusted intermediaries required</p>
+                  <h3 className="font-semibold mb-2 text-sm sm:text-base">Trustless</h3>
+                  <p className="text-xs sm:text-sm text-gray-400">No central authority or trusted intermediaries required</p>
                 </div>
-                <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6 hover:border-teal-500/50 transition-all duration-300 hover:scale-105">
-                  <div className="w-12 h-12 flex items-center justify-center bg-teal-500/10 rounded-lg mb-4">
-                    <i className="ri-lock-password-line text-2xl text-teal-400"></i>
+                <div className="bg-[#161B22] border border-gray-800 rounded-lg p-4 sm:p-6 hover:border-teal-500/50 transition-all duration-300 hover:scale-105">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-teal-500/10 rounded-lg mb-3 sm:mb-4">
+                    <i className="ri-lock-password-line text-xl sm:text-2xl text-teal-400"></i>
                   </div>
-                  <h3 className="font-semibold mb-2">Cryptographic</h3>
-                  <p className="text-sm text-gray-400">All verifications produce verifiable proofs</p>
+                  <h3 className="font-semibold mb-2 text-sm sm:text-base">Cryptographic</h3>
+                  <p className="text-xs sm:text-sm text-gray-400">All verifications produce verifiable proofs</p>
                 </div>
-                <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6 hover:border-violet-500/50 transition-all duration-300 hover:scale-105">
-                  <div className="w-12 h-12 flex items-center justify-center bg-violet-500/10 rounded-lg mb-4">
-                    <i className="ri-expand-diagonal-line text-2xl text-violet-400"></i>
+                <div className="bg-[#161B22] border border-gray-800 rounded-lg p-4 sm:p-6 hover:border-violet-500/50 transition-all duration-300 hover:scale-105">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-violet-500/10 rounded-lg mb-3 sm:mb-4">
+                    <i className="ri-expand-diagonal-line text-xl sm:text-2xl text-violet-400"></i>
                   </div>
-                  <h3 className="font-semibold mb-2">Scalable</h3>
-                  <p className="text-sm text-gray-400">Horizontal scaling with parallel processing</p>
+                  <h3 className="font-semibold mb-2 text-sm sm:text-base">Scalable</h3>
+                  <p className="text-xs sm:text-sm text-gray-400">Horizontal scaling with parallel processing</p>
                 </div>
               </div>
             </section>
 
             {/* Getting Started */}
-            <section id="getting-started" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">Getting Started</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="getting-started" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Getting Started</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 This guide will help you integrate the LionXboost into your Web3 application in minutes.
               </p>
 
@@ -255,13 +283,13 @@ export default function DocsPage() {
 <span className="comment">// Verify proof on-chain</span>
 <span className="keyword">const</span> isValid = <span className="keyword">await</span> client.<span className="function">verifyProof</span>(result.proof);</code></pre>
 
-              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-xl p-6 mt-8">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-amber-500/20 rounded-lg flex-shrink-0">
-                    <i className="ri-lightbulb-line text-2xl text-amber-400"></i>
+              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-xl p-4 sm:p-6 mt-6 sm:mt-8">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-amber-500/20 rounded-lg flex-shrink-0">
+                    <i className="ri-lightbulb-line text-xl sm:text-2xl text-amber-400"></i>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2 text-amber-400">Testnet First</h3>
+                    <h3 className="text-base sm:text-lg font-semibold mb-2 text-amber-400">Testnet First</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
                       We recommend testing on our testnet before deploying to mainnet. Get free testnet tokens from our faucet and experiment without risk.
                     </p>
@@ -271,16 +299,16 @@ export default function DocsPage() {
             </section>
 
             {/* Architecture */}
-            <section id="architecture" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">Protocol Architecture</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="architecture" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Protocol Architecture</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 LionXboost consists of four core layers working together to provide trustless verification.
               </p>
 
               <div className="space-y-6">
-                <div className="bg-[#161B22] border border-emerald-500/20 rounded-xl p-6 hover:border-emerald-500/50 transition-all duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold">
+                <div className="bg-[#161B22] border border-emerald-500/20 rounded-xl p-4 sm:p-6 hover:border-emerald-500/50 transition-all duration-300">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-8 h-8 sm:w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
                       1
                     </div>
                     <div className="flex-1">
@@ -298,9 +326,9 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-[#161B22] border border-teal-500/20 rounded-xl p-6 hover:border-teal-500/50 transition-all duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 flex items-center justify-center bg-teal-500/10 rounded-lg flex-shrink-0 text-teal-400 font-bold">
+                <div className="bg-[#161B22] border border-teal-500/20 rounded-xl p-4 sm:p-6 hover:border-teal-500/50 transition-all duration-300">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-8 h-8 sm:w-10 h-10 flex items-center justify-center bg-teal-500/10 rounded-lg flex-shrink-0 text-teal-400 font-bold text-sm">
                       2
                     </div>
                     <div className="flex-1">
@@ -317,9 +345,9 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-[#161B22] border border-violet-500/20 rounded-xl p-6 hover:border-violet-500/50 transition-all duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 flex items-center justify-center bg-violet-500/10 rounded-lg flex-shrink-0 text-violet-400 font-bold">
+                <div className="bg-[#161B22] border border-violet-500/20 rounded-xl p-4 sm:p-6 hover:border-violet-500/50 transition-all duration-300">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-8 h-8 sm:w-10 h-10 flex items-center justify-center bg-violet-500/10 rounded-lg flex-shrink-0 text-violet-400 font-bold text-sm">
                       3
                     </div>
                     <div className="flex-1">
@@ -336,9 +364,9 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-[#161B22] border border-lime-500/20 rounded-xl p-6 hover:border-lime-500/50 transition-all duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 flex items-center justify-center bg-lime-500/10 rounded-lg flex-shrink-0 text-lime-400 font-bold">
+                <div className="bg-[#161B22] border border-lime-500/20 rounded-xl p-4 sm:p-6 hover:border-lime-500/50 transition-all duration-300">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-8 h-8 sm:w-10 h-10 flex items-center justify-center bg-lime-500/10 rounded-lg flex-shrink-0 text-lime-400 font-bold text-sm">
                       4
                     </div>
                     <div className="flex-1">
@@ -358,9 +386,9 @@ export default function DocsPage() {
             </section>
 
             {/* Smart Contracts */}
-            <section id="smart-contracts" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">Smart Contracts</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="smart-contracts" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Smart Contracts</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 Core protocol contracts deployed on supported networks. All contracts are verified, audited, and open source.
               </p>
 
@@ -386,7 +414,7 @@ export default function DocsPage() {
   ) <span className="keyword">external</span> <span className="keyword">view</span> <span className="keyword">returns</span> (VerificationResult <span className="keyword">memory</span>);
 {`}`}</code></pre>
 
-              <h3 className="text-2xl font-semibold mb-4 mt-8 text-emerald-400">NodeStaking.sol</h3>
+              <h3 className="text-2xl font-semibold mb-4 mt-6 text-emerald-400">NodeStaking.sol</h3>
               <p className="text-gray-400 mb-4">Manages node stakes and slashing conditions.</p>
               <pre><code><span className="keyword">interface</span> <span className="function">INodeStaking</span> {`{`}
   <span className="comment">// Stake tokens to become node</span>
@@ -412,7 +440,7 @@ export default function DocsPage() {
                 <p className="text-xs sm:text-sm md:text-base text-gray-400">Verified and Audited</p>
               </div>
 
-              <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6 mt-8">
+              <div className="bg-[#161B22] border border-gray-800 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8">
                 <h4 className="font-semibold mb-4">Deployed Contract</h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
@@ -434,9 +462,9 @@ export default function DocsPage() {
             </section>
 
             {/* Node Guide */}
-            <section id="node-guide" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">Node Guide</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="node-guide" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Node Guide</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 Learn how to run a node and participate in the verification network.
               </p>
 
@@ -465,7 +493,7 @@ export default function DocsPage() {
               <div className="space-y-6">
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
+                    <div className="w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
                       1
                     </div>
                     <div className="flex-1">
@@ -477,7 +505,7 @@ export default function DocsPage() {
 
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
+                    <div className="w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
                       2
                     </div>
                     <div className="flex-1">
@@ -490,7 +518,7 @@ export default function DocsPage() {
 
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
+                    <div className="w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
                       3
                     </div>
                     <div className="flex-1">
@@ -502,7 +530,7 @@ export default function DocsPage() {
 
                 <div className="bg-[#161B22] border border-gray-800 rounded-lg p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
+                    <div className="w-10 h-10 flex items-center justify-center bg-emerald-500/10 rounded-lg flex-shrink-0 text-emerald-400 font-bold text-sm">
                       4
                     </div>
                     <div className="flex-1">
@@ -515,9 +543,9 @@ export default function DocsPage() {
             </section>
 
             {/* API Reference */}
-            <section id="api-reference" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">API Reference</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="api-reference" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">API Reference</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 Complete API documentation for integrating the LionXboost.
               </p>
 
@@ -575,9 +603,9 @@ export default function DocsPage() {
             </section>
 
             {/* Integration Guide */}
-            <section id="integration" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">Integration Guide</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="integration" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Integration Guide</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 Step-by-step guide for integrating verification into your Web3 application.
               </p>
 
@@ -607,7 +635,7 @@ export default function DocsPage() {
   {`}`}
 {`}`}</code></pre>
 
-              <h3 className="text-2xl font-semibold mb-4 mt-8 text-emerald-400">DAO Governance Example</h3>
+              <h3 className="text-2xl font-semibold mb-4 mt-6 text-emerald-400">DAO Governance Example</h3>
               <p className="text-gray-400 mb-4">Verify off-chain voting results before on-chain execution:</p>
               <pre><code><span className="keyword">async function</span> <span className="function">executeProposal</span>(proposalId, votes) {`{`}
   <span className="comment">// Verify voting results</span>
@@ -627,15 +655,15 @@ export default function DocsPage() {
             </section>
 
             {/* Security Model */}
-            <section id="security" className="mb-24">
-              <h2 className="text-4xl font-bold mb-6">Security Model</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+            <section id="security" className="mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Security Model</h2>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 Understanding the economic and cryptographic security guarantees of the protocol.
               </p>
 
               <div className="space-y-6">
-                <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-3">
+                <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-xl p-4 sm:p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center gap-3">
                     <i className="ri-shield-check-line text-2xl text-emerald-400"></i>
                     Economic Security
                   </h3>
@@ -654,8 +682,8 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-3">
+                <div className="bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl p-4 sm:p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center gap-3">
                     <i className="ri-lock-password-line text-2xl text-violet-400"></i>
                     Cryptographic Security
                   </h3>
@@ -670,8 +698,8 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-3">
+                <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-xl p-4 sm:p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center gap-3">
                     <i className="ri-bug-line text-2xl text-amber-400"></i>
                     Audits &amp; Bug Bounty
                   </h3>
@@ -679,10 +707,10 @@ export default function DocsPage() {
                     All smart contracts have been audited by leading security firms. We maintain an active bug bounty program rewarding responsible disclosure of vulnerabilities.
                   </p>
                   <div className="flex items-center gap-4">
-                    <a href="#" className="px-6 py-3 bg-amber-500/10 text-amber-400 rounded-lg hover:bg-amber-500/20 transition-all duration-300 cursor-pointer whitespace-nowrap">
+                    <a href="#" className="px-6 py-3 bg-amber-500/10 text-amber-400 rounded-lg hover:bg-amber-500/20 transition-all duration-300 cursor-pointer whitespace-nowrap text-sm">
                       View Audit Reports
                     </a>
-                    <a href="#" className="px-6 py-3 bg-orange-500/10 text-orange-400 rounded-lg hover:bg-orange-500/20 transition-all duration-300 cursor-pointer whitespace-nowrap">
+                    <a href="#" className="px-6 py-3 bg-orange-500/10 text-orange-400 rounded-lg hover:bg-orange-500/20 transition-all duration-300 cursor-pointer whitespace-nowrap text-sm">
                       Bug Bounty Program
                     </a>
                   </div>
@@ -691,7 +719,7 @@ export default function DocsPage() {
             </section>
 
             {/* Footer Navigation */}
-            <div className="border-t border-gray-800 pt-12 mt-24">
+            <div className="border-t border-gray-800 pt-8 sm:pt-12 mt-16 sm:mt-24">
               <div className="flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer">
                   <i className="ri-arrow-left-line"></i>

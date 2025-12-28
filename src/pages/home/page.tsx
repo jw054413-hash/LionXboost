@@ -96,11 +96,11 @@ export default function HomePage() {
             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">LionXboost</span>
           </Link>
           <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            <a href="#problem" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm">Problem</a>
-            <a href="#solution" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm">Solution</a>
-            <a href="#how-it-works" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm">How It Works</a>
-            <a href="#features" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm">Features</a>
-            <a href="#token" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm">Token</a>
+            <a href="#problem" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">Problem</a>
+            <a href="#solution" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">Solution</a>
+            <a href="#how-it-works" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">How It Works</a>
+            <a href="#features" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">Features</a>
+            <a href="#token" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">Token</a>
             <a href={twitterAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm flex items-center gap-1">
               <i className="ri-twitter-x-line text-base"></i>
             </a>
