@@ -9,7 +9,7 @@ export default function DocsPage() {
   // Contract address - update this with your actual contract address
   const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
   const githubAccount = "https://github.com/jw054413-hash/LionXboost";
-  const twitterAccount = "https://twitter.com/youraccount";
+  const twitterAccount = "https://x.com/lionxboost33?s=11";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -687,7 +687,7 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl p-4 sm:p-6">
+                <div className="bg-gradient-to-br from-violehttps://twitter.com/youraccountt-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl p-4 sm:p-6">
                   <h3 className="text-xl font-semibold mb-3 flex items-center gap-3">
                     <i className="ri-lock-password-line text-2xl text-violet-400"></i>
                     Cryptographic Security

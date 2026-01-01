@@ -37,7 +37,7 @@ export default function HomePage() {
 
   const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
   const githubAccount = "https://github.com/jw054413-hash/LionXboost";
-  const twitterAccount = "https://twitter.com/youraccount";
+  const twitterAccount = "https://x.com/lionxboost33?s=11";
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);

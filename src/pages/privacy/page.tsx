@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default function PrivacyPage() {
   const [scrolled, setScrolled] = useState(false);
 
-  const twitterAccount = "https://twitter.com/youraccount";
-  const githubAccount = "https://github.com/youraccount";
+  const twitterAccount = "https://x.com/lionxboost33?s=11";
+  const githubAccount = "https://github.com/jw054413-hash/LionXboost";
 
   useEffect(() => {
     const handleScroll = () => {
