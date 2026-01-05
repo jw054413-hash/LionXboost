@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 export default function SecurityPage() {
   const [scrolled, setScrolled] = useState(false);
-
-  const twitterAccount = "https://twitter.com/youraccount";
-  const githubAccount = "https://github.com/youraccount";
+  const githubAccount = "https://github.com/jw054413-hash/LionXboost";
+  const twitterAccount = "https://x.com/LionXboost";
+  const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
+  const dexscreenerUrl = `https://dexscreener.com/ethereum/${contractAddress}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,13 +32,18 @@ export default function SecurityPage() {
           <Link to="/" className="hover:opacity-80 transition-opacity">
             <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">LionXboost</span>
           </Link>
-          <div className="flex items-center gap-4">
-            <a href={twitterAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">
-              <i className="ri-twitter-x-line text-lg"></i>
+          <div className="flex items-center gap-6">
+            <Link to="/" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">Home</Link>
+            <Link to="/docs" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">Docs</Link>
+            <a href={dexscreenerUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer" title="View on Dexscreener">
+              <img src="https://dexscreener.com/favicon.ico" alt="Dexscreener" className="w-4 h-4" />
             </a>
-            <Link to="/" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm sm:text-base">
-              <i className="ri-arrow-left-line mr-1 sm:mr-2"></i>Back
-            </Link>
+            <a href={twitterAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">
+              <i className="ri-twitter-x-line"></i>
+            </a>
+            <a href={githubAccount} target="_blank" rel="noopener noreferrer" className="px-5 py-2 border border-emerald-400 text-emerald-400 rounded-lg hover:bg-emerald-400/10 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer whitespace-nowrap">
+              <i className="ri-github-fill mr-2"></i>Repository
+            </a>
           </div>
         </div>
       </nav>

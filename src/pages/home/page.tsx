@@ -37,7 +37,8 @@ export default function HomePage() {
 
   const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
   const githubAccount = "https://github.com/jw054413-hash/LionXboost";
-  const twitterAccount = "https://x.com/lionxboost33?s=11";
+  const twitterAccount = "https://x.com/LionXboost";
+  const dexscreenerUrl = `https://dexscreener.com/ethereum/${contractAddress}`;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -101,6 +102,9 @@ export default function HomePage() {
             <a href="#how-it-works" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">How It Works</a>
             <a href="#features" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">Features</a>
             <a href="#token" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm whitespace-nowrap">Token</a>
+            <a href={dexscreenerUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm flex items-center gap-1" title="View on Dexscreener">
+              <img src="https://dexscreener.com/favicon.ico" alt="Dexscreener" className="w-4 h-4" />
+            </a>
             <a href={twitterAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm flex items-center gap-1">
               <i className="ri-twitter-x-line text-base"></i>
             </a>
@@ -123,6 +127,9 @@ export default function HomePage() {
               <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/5 rounded-xl transition-all duration-300 cursor-pointer">How It Works</a>
               <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/5 rounded-xl transition-all duration-300 cursor-pointer">Features</a>
               <a href="#token" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/5 rounded-xl transition-all duration-300 cursor-pointer">Token</a>
+              <a href={dexscreenerUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/5 rounded-xl transition-all duration-300 cursor-pointer">
+                <img src="https://dexscreener.com/favicon.ico" alt="Dexscreener" className="w-4 h-4 inline mr-2" />Dexscreener
+              </a>
               <a href={twitterAccount} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/5 rounded-xl transition-all duration-300 cursor-pointer">
                 <i className="ri-twitter-x-line mr-2"></i>Twitter
               </a>

@@ -9,7 +9,8 @@ export default function DocsPage() {
   // Contract address - update this with your actual contract address
   const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
   const githubAccount = "https://github.com/jw054413-hash/LionXboost";
-  const twitterAccount = "https://x.com/lionxboost33?s=11";
+  const twitterAccount = "https://x.com/LionXboost";
+  const dexscreenerUrl = `https://dexscreener.com/ethereum/${contractAddress}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,6 +111,9 @@ export default function DocsPage() {
           </Link>
           <div className="flex items-center gap-3 sm:gap-6">
             <Link to="/" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer text-sm sm:text-base">Home</Link>
+            <a href={dexscreenerUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer" title="View on Dexscreener">
+              <img src="https://dexscreener.com/favicon.ico" alt="Dexscreener" className="w-4 h-4" />
+            </a>
             <a href={twitterAccount} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-110 cursor-pointer">
               <i className="ri-twitter-x-line text-base sm:text-lg"></i>
             </a>
@@ -687,7 +691,7 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-violehttps://twitter.com/youraccountt-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl p-4 sm:p-6">
+                <div className="bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl p-4 sm:p-6">
                   <h3 className="text-xl font-semibold mb-3 flex items-center gap-3">
                     <i className="ri-lock-password-line text-2xl text-violet-400"></i>
                     Cryptographic Security
