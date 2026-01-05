@@ -35,7 +35,7 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, []);
 
-  const contractAddress = "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb";
+  const contractAddress = "CA: Coming Soon";
   const githubAccount = "https://github.com/jw054413-hash/LionXboost";
   const twitterAccount = "https://x.com/LionXboost";
   const dexscreenerUrl = `https://dexscreener.com/ethereum/${contractAddress}`;
